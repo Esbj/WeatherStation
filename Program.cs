@@ -4,6 +4,7 @@ namespace Väderstationen
 {
     class Program
     {
+        static List<int> weatherData = new List<int>();
         static void menu()
         {
             Console.WriteLine("--------------------------------------------------");
@@ -15,7 +16,6 @@ namespace Väderstationen
             Console.WriteLine("[A]vsluta");
             Console.WriteLine("--------------------------------------------------");
         }
-        List<int> Väderdata = new List<int>();
         static void add()
         {
             Console.WriteLine("Skriv in tempraturen");
@@ -23,15 +23,23 @@ namespace Väderstationen
             try
             {
                 int temp = Convert.ToInt32(sTemp);
+                weatherData.Add(temp);
             }
             catch
             {
                 Console.WriteLine("Du matade inte in en tempratur i siffervärde.");
             }
+
         }
         static void writeMedian()
         {
-
+            int countTemp=0, medianTemp;
+            foreach (int temp in weatherData){
+                Console.WriteLine("Tempratur "+temp);
+                countTemp = countTemp + temp;
+            }
+            medianTemp = countTemp/weatherData.Count;
+            Console.WriteLine ("Medeltempraturen är:"+medianTemp);
         }
         static void taBort()
         {
@@ -49,16 +57,16 @@ namespace Väderstationen
                 char choise = input[0];
                 switch (choise)
                 {
-                    case 'L':
+                    case 'L'://lägg till
                         add();
                         break;
-                    case 'S':
+                    case 'S'://skriv ut
                         writeMedian();
                         break;
-                    case 'T':
+                    case 'T'://ta bort
                         taBort();
                         break;
-                    case 'A':
+                    case 'A'://avsluta
                         return;
                     default:
                         Console.WriteLine("Jag förstod inte vad du skrev.");
