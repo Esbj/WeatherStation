@@ -4,7 +4,6 @@ namespace Väderstationen
 {
     class Program
     {
-        static List<int> weatherData = new List<int>();
         static void menu()
         {
             Console.WriteLine("--------------------------------------------------");
@@ -16,13 +15,26 @@ namespace Väderstationen
             Console.WriteLine("[A]vsluta");
             Console.WriteLine("--------------------------------------------------");
         }
+        static int countMedian(List<int> input){
+            int countTemp = 0, medianTemp;
+            foreach (int temp in input)
+            {
+                Console.WriteLine("Tempratur " + temp);
+                countTemp = countTemp + temp;
+            }
+            medianTemp = countTemp / input.Count;
+            return medianTemp;
+
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("");
             Console.WriteLine("Hej och välkommen till Väderstationen!");
             Console.WriteLine("");
+
             while (true)
             {
+                List<int> weatherData = new List<int>();
                 menu();
                 string input = Console.ReadLine().ToUpper();
                 char choise = input[0];
@@ -41,17 +53,14 @@ namespace Väderstationen
                             Console.WriteLine("Du matade inte in en tempratur i siffervärde.");
                         }
                         break;
-                    case 'S'://skriv ut
-                        int countTemp = 0, medianTemp;
-                        foreach (int temp in weatherData)
-                        {
-                            Console.WriteLine("Tempratur " + temp);
-                            countTemp = countTemp + temp;
-                        }
-                        medianTemp = countTemp / weatherData.Count;
-                        Console.WriteLine("Medeltempraturen är:" + medianTemp);
+                    case 'S'://skriv ut data och medel
+                        int medelvärde = countMedian(weatherData);
                         break;
                     case 'T'://ta bort
+                        countMedian(weatherData);
+                        Console.WriteLine("Ange vilken mätning du vill ta bort.");
+                        int toRemove = Convert.ToInt32(Console.ReadLine());
+                        weatherData.RemoveAt(toRemove);
                         break;
                     case 'A'://avsluta
                         return;
