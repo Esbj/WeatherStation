@@ -16,35 +16,6 @@ namespace Väderstationen
             Console.WriteLine("[A]vsluta");
             Console.WriteLine("--------------------------------------------------");
         }
-        static void add()
-        {
-            Console.WriteLine("Skriv in tempraturen");
-            string sTemp = Console.ReadLine();
-            try
-            {
-                int temp = Convert.ToInt32(sTemp);
-                weatherData.Add(temp);
-            }
-            catch
-            {
-                Console.WriteLine("Du matade inte in en tempratur i siffervärde.");
-            }
-
-        }
-        static void writeMedian()
-        {
-            int countTemp=0, medianTemp;
-            foreach (int temp in weatherData){
-                Console.WriteLine("Tempratur "+temp);
-                countTemp = countTemp + temp;
-            }
-            medianTemp = countTemp/weatherData.Count;
-            Console.WriteLine ("Medeltempraturen är:"+medianTemp);
-        }
-        static void taBort()
-        {
-
-        }
         static void Main(string[] args)
         {
             Console.WriteLine("");
@@ -58,13 +29,29 @@ namespace Väderstationen
                 switch (choise)
                 {
                     case 'L'://lägg till
-                        add();
+                        Console.WriteLine("Skriv in tempraturen");
+                        string sTemp = Console.ReadLine();
+                        try
+                        {
+                            int temp = Convert.ToInt32(sTemp);
+                            weatherData.Add(temp);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Du matade inte in en tempratur i siffervärde.");
+                        }
                         break;
                     case 'S'://skriv ut
-                        writeMedian();
+                        int countTemp = 0, medianTemp;
+                        foreach (int temp in weatherData)
+                        {
+                            Console.WriteLine("Tempratur " + temp);
+                            countTemp = countTemp + temp;
+                        }
+                        medianTemp = countTemp / weatherData.Count;
+                        Console.WriteLine("Medeltempraturen är:" + medianTemp);
                         break;
                     case 'T'://ta bort
-                        taBort();
                         break;
                     case 'A'://avsluta
                         return;
