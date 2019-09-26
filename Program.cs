@@ -15,26 +15,34 @@ namespace Väderstationen
             Console.WriteLine("[A]vsluta");
             Console.WriteLine("--------------------------------------------------");
         }
-        static int countMedian(List<int> input){
+        static int countMedian(List<int> input)
+        {
             int countTemp = 0, medianTemp;
-            foreach (int temp in input)
-            {
-                Console.WriteLine("Tempratur " + temp);
-                countTemp = countTemp + temp;
+
+            System.Console.WriteLine("De lagrade tempraturerna är:");
+            for (int i = 0; i < input.Count; i++){
+                System.Console.WriteLine("Temp " + (i+1) + "|" + input[i]);
+                countTemp = countTemp + input[i];
             }
+
             medianTemp = countTemp / input.Count;
             return medianTemp;
+            // foreach (int temp in input)
+            // {
+            //     Console.WriteLine("Tempratur " + temp);
+            //     countTemp = countTemp + temp;
+            // }
 
         }
         static void Main(string[] args)
         {
+            List<int> weatherData = new List<int>();
             Console.WriteLine("");
             Console.WriteLine("Hej och välkommen till Väderstationen!");
             Console.WriteLine("");
 
             while (true)
             {
-                List<int> weatherData = new List<int>();
                 menu();
                 string input = Console.ReadLine().ToUpper();
                 char choise = input[0];
@@ -54,7 +62,9 @@ namespace Väderstationen
                         }
                         break;
                     case 'S'://skriv ut data och medel
+
                         int medelvärde = countMedian(weatherData);
+                        System.Console.WriteLine("Medelvärdet är: "+medelvärde);
                         break;
                     case 'T'://ta bort
                         countMedian(weatherData);
