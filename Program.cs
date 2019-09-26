@@ -17,22 +17,22 @@ namespace Väderstationen
         }
         static int countMedian(List<int> input)
         {
-            int countTemp = 0, medianTemp;
-
-            System.Console.WriteLine("De lagrade tempraturerna är:");
-            for (int i = 0; i < input.Count; i++){
-                System.Console.WriteLine("Temp " + (i+1) + "|" + input[i]);
-                countTemp = countTemp + input[i];
+            if (input.Count > 0)
+            {
+                int countTemp = 0, medianTemp;
+                System.Console.WriteLine("De lagrade tempraturerna är:");
+                for (int i = 0; i < input.Count; i++)
+                {
+                    countTemp = countTemp + input[i];
+                }
+                medianTemp = countTemp / input.Count;
+                return medianTemp;
             }
-
-            medianTemp = countTemp / input.Count;
-            return medianTemp;
-            // foreach (int temp in input)
-            // {
-            //     Console.WriteLine("Tempratur " + temp);
-            //     countTemp = countTemp + temp;
-            // }
-
+            else
+            {
+                System.Console.WriteLine("Det finns inga lagrade mätningar.");
+                return 0;
+            }
         }
         static void Main(string[] args)
         {
@@ -56,7 +56,7 @@ namespace Väderstationen
                             int temp = Convert.ToInt32(sTemp);
                             weatherData.Add(temp);
                         }
-                        catch
+                    catch
                         {
                             Console.WriteLine("Du matade inte in en tempratur i siffervärde.");
                         }
@@ -64,7 +64,7 @@ namespace Väderstationen
                     case 'S'://skriv ut data och medel
 
                         int medelvärde = countMedian(weatherData);
-                        System.Console.WriteLine("Medelvärdet är: "+medelvärde);
+                        System.Console.WriteLine("Medelvärdet är: " + medelvärde);
                         break;
                     case 'T'://ta bort
                         countMedian(weatherData);
