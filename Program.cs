@@ -24,6 +24,7 @@ namespace Väderstationen
                 for (int i = 0; i < input.Count; i++)
                 {
                     countTemp = countTemp + input[i];
+                    System.Console.WriteLine("Tempratur "+(i+1) + ": " + input[i]);
                 }
                 medianTemp = countTemp / input.Count;
                 return medianTemp;
@@ -32,11 +33,19 @@ namespace Väderstationen
             {
                 System.Console.WriteLine("Det finns inga lagrade mätningar.");
                 return 0;
+                
             }
         }
         static void Main(string[] args)
         {
             List<int> weatherData = new List<int>();
+
+            weatherData.Add(1);
+            weatherData.Add(2);
+            weatherData.Add(3);
+            
+            
+
             Console.WriteLine("");
             Console.WriteLine("Hej och välkommen till Väderstationen!");
             Console.WriteLine("");
@@ -67,11 +76,22 @@ namespace Väderstationen
                         System.Console.WriteLine("Medelvärdet är: " + medelvärde);
                         break;
                     case 'T'://ta bort
-                        countMedian(weatherData);
-                        Console.WriteLine("Ange vilken mätning du vill ta bort.");
-                        int toRemove = Convert.ToInt32(Console.ReadLine());
-                        weatherData.RemoveAt(toRemove);
-                        break;
+                        if (weatherData.Count > 0){
+                            countMedian(weatherData);
+                            Console.WriteLine("Ange vilken mätning du vill ta bort.");
+                            try{
+
+                            int toRemove = Convert.ToInt32(Console.ReadLine());
+                            weatherData.RemoveAt(toRemove-1);
+                            break;
+                            }catch{
+                                Console.WriteLine("Ange indexplatsen på tepmraturen i siffervärde.");
+                                break;
+                            }
+                        }else{
+                            Console.WriteLine("Det finns ingen väderdata lagrad.");
+                            break;
+                        }
                     case 'A'://avsluta
                         return;
                     default:
